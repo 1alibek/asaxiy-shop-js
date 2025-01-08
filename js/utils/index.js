@@ -1,4 +1,4 @@
-let BASE_URL = "https://676a9fb7863eaa5ac0df14f1.mockapi.io/asaxiy";
+let BASE_URL = "https://677a303e671ca03068334652.mockapi.io/products";
 const usefetch = () => {
   const response = () => {
     return fetch(BASE_URL,{
@@ -14,7 +14,7 @@ const usefetch = () => {
 };
 function addUIData(value, cards) {
   let card = document.createElement("div");
-
+  card.classList.add("card")
   card.innerHTML = `
      <div>
       <img class="imgofcard mx-auto" src="${
@@ -23,21 +23,21 @@ function addUIData(value, cards) {
     </div>
     <div class="txtarea p-[15px]">
       <h1 class="text-[14px] multi-line font-medium">${
-        value.name || "No Title"
+        value.title || "No Title"
       }</h1>
       <div class="stars flex items-center justify-between my-[8px]">
         
-        <p>${value.have || 0} отзывов</p>
+        <p>${value.comment || 0} отзывов</p>
       </div>
       <div class="prices">
         <p class="text-[12px] font-normal text-[#94a3b8]">
-          <s>${value.old_price} сум</s>
+          <s>${value.price + Math.round(Math.random() + 150000)} сум</s>
         </p>
         <p class="text-[18px] font-bold text-[#006bff] my-[4px]">${
           value.price.toLocaleString() || 0
         } сум</p>
         <button class="text-[#fe7300] border rounded-md border-[#fe7300] p-[6px] w-[100%] text-left text-[14px] font-medium hover:bg-[#fe7300] hover:text-white transition-all active:scale-95">
-          ${value.month_payment} сум x ${value.month} мес
+          ${value.month.toLocaleString()} сум x 12 мес
         </button>
       </div>
       <div class="btns flex items-center gap-1 mt-[15px]">

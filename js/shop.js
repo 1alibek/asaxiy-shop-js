@@ -24,7 +24,7 @@ function renderUiProduct(cart) {
               <div class="flex items-center justify-between w-full mb-4">
                 <h5
                   class="font-manrope font-bold text-2xl leading-9 text-gray-900">
-                  ${value.name}
+                  ${value.title}
                 </h5>
                 <button id=${value.id}
 
@@ -32,10 +32,6 @@ function renderUiProduct(cart) {
                  delete
                 </button>
               </div>
-              <p class="font-normal text-base leading-7 text-gray-500 mb-6">
-               ${value.name}
-                <a href="javascript:;" class="text-indigo-600">More....</a>
-              </p>
               <div class="flex justify-between items-center">
                 <div class="flex items-center gap-4">
                   <button  id=${value.id}
