@@ -17,6 +17,8 @@ function getData(data) {
     });
   });
 }
+
+
 function AddToCard(data) {
   cardLengthFunc();
   card = [...card, data];
