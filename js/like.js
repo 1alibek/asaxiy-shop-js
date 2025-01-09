@@ -1,35 +1,20 @@
 let products = document.querySelector(".products");
+const products_ui = document.querySelector(".products_ui");
+const no_data = document.querySelector(".no-data");
 let cart = JSON.parse(localStorage.getItem("likes")) || [];
-
-function groupCartItems(cart) {
-  let groupedCart = [];
-  cart.forEach((item) => {
-    console.log(item);
-    
-    let existingItem = groupedCart.find((product) => product.id === item.id);
-    if (existingItem) {
-      existingItem.count += 1;
-    } else {
-      groupedCart.push({ ...item, count: 1 });
-    }
-  });
-  return groupedCart;
-}
-
-function renderCart(cart) {
+function renderUiProduct(cart) {
   products.innerHTML = "";
-  let groupedCart = groupCartItems(cart);
-  groupedCart.forEach((value) => {
-    let card = document.createElement("div");
-    card.classList.add("card");
-    console.log(value);
-    
-    card.innerHTML = `
-           <div class="relative">
-     <i class="fa-regular fa-heart likebtn absolute top-1 left-4 like"></i>
-      <img class="imgofcard mx-auto" src="${
-        value.img || "default-image.jpg"
-      }" alt="" />
+  cart.forEach((value) => {
+    let product = document.createElement("div");
+
+    product.innerHTML = `
+        <div class="relative">
+ <i id=${
+   value.id
+ } class="fa-regular fa-heart likebtn absolute top-1 left-4 like"></i>
+       <img class="imgofcard mx-auto" src="${
+         value.img || "default-image.jpg"
+       }" alt="" />
     </div>
     <div class="txtarea p-[15px]">
       <h1 class="text-[14px] multi-line font-medium">${
@@ -62,40 +47,21 @@ function renderCart(cart) {
             <img src="./svg/icon4 copy.svg" alt="">
         </button>
       </div>
-    </div>`;
-
-    products.append(card);
-  });
-
-  deleteCart();
-}
-
-// function ratingStars(rating) {
-//   let stars = "";
-//   for (let i = 1; i <= 5; i++) {
-//     stars += `<i class="bx bxs-star ${
-//       i <= Math.round(rating) ? "yellow-star" : "gray-star"
-//     }"></i>`;
-//   }
-//   return stars;
-// }
-
-function deleteCart() {
-  let deleteButtons = document.querySelectorAll(".likebtn");
-  deleteButtons.forEach((button) => {
-    button.addEventListener("click", (e) => {
-      let productId = e.target.dataset.id;
-      deleteProduct(productId);
-    });
+    </div>
+    `;
+    products.append(product);
   });
 }
 
-function deleteProduct(cartId) {
-  cart = cart.filter((item) => item.id !== cartId);
+products.addEventListener("click", (e) => {
+  if (e.target.classList.contains("likebtn")) {
+    deleteData(e.target.id);
+  }
+});
+function deleteData(id) {
+  cart = cart.filter((value) => value.id !== id);
   localStorage.setItem("likes", JSON.stringify(cart));
-  renderCart(cart);
+  renderUiProduct(cart);
 }
 
-renderCart(cart);
-
-
+renderUiProduct(cart);
