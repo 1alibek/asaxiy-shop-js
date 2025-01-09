@@ -28,7 +28,7 @@ function renderUiProduct(cart) {
                 </h5>
                 <button id=${value.id}
 
-                  class="rounded-full deleteelement group flex items-center justify-center focus-within:outline-red-500">
+                  class="rounded-full deleteelement bg-red-500 text-white px-4 py-1 group flex items-center justify-center focus-within:outline-red-500">
                  delete
                 </button>
               </div>
@@ -62,5 +62,18 @@ function noData(section, section_404, length) {
     section_404.style.display = "flex";
   }
 }
+products.addEventListener("click", (e) => {
+  if (e.target.classList.contains("deleteelement")) {
+    deleteData(e.target.id);
+  }
+});
+function deleteData(id) {
+  cart = cart.filter((value) => value.id !== id);
+  localStorage.setItem("cards", JSON.stringify(cart));
+  renderUiProduct(cart);
+  noData(products_ui, no_data, cart.length);
+  console.log(value);
+}
+
 noData(products_ui, no_data, cart.length);
 renderUiProduct(cart);

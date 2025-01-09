@@ -16,7 +16,8 @@ function addUIData(value, cards) {
   let card = document.createElement("div");
   card.classList.add("card")
   card.innerHTML = `
-     <div>
+     <div class="relative">
+     <i class="fa-regular fa-heart likebtn absolute top-1 left-4 like"></i>
       <img class="imgofcard mx-auto" src="${
         value.img || "default-image.jpg"
       }" alt="" />
