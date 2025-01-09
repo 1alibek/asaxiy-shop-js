@@ -1,6 +1,9 @@
 const form = document.getElementById("form");
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
+const toast = document.getElementById("toast");
+const eyeIcon = document.querySelector(".fa-eye");
+const passwordType = document.querySelector(".pass-type");
 const error = document.querySelector(".error");
 
 if (localStorage.getItem("userId")) {
@@ -37,4 +40,14 @@ form.addEventListener("submit", (e) => {
     .catch((err) => console.log(err));
 });
 
-
+eyeIcon.addEventListener("click", () => {
+  if (passwordType.type === "password") {
+    passwordType.type = "text";
+    eyeIcon.classList.remove("fa-eye");
+    eyeIcon.classList.add("fa-eye-slash");
+  } else {
+    passwordType.type = "password";
+    eyeIcon.classList.remove("fa-eye-slash");
+    eyeIcon.classList.add("fa-eye");
+  }
+});

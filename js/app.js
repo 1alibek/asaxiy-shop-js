@@ -51,7 +51,7 @@ filter_btn.addEventListener("click", (e) => {
     getData(productdata);
   }
 });
-let likes = localStorage.getItem('likes')||[]
+let likes = JSON.parse(localStorage.getItem("likes")) || [];
 function Likeshop(data) {
    likes = [...likes, data];
    localStorage.setItem("likes", JSON.stringify(likes));
@@ -61,7 +61,7 @@ function Likeshop(data) {
 function AddToCard(data) {
   card = [...card, data];
   localStorage.setItem("cards", JSON.stringify(card));
-  cardLengthFunc2();
+  cardLengthFunc();
 }
 
 function cardLengthFunc() {
