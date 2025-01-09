@@ -3,6 +3,7 @@ import { usefetch, addUIData } from "./utils/index.js";
 const cards = document.querySelector(".cards");
 const counter = document.querySelector(".counter");
 const counter2 = document.querySelector(".counter2");
+const logout = document.querySelector(".logout");
 const filter_btn = document.querySelector(".filter_btn");
 
 const request = usefetch();
@@ -34,7 +35,6 @@ function setupButtons(data) {
     });
   });
 
-
   let likebutton = document.querySelectorAll(".likebtn");
   likebutton.forEach((value, idx) => {
     value.addEventListener("click", () => {
@@ -53,9 +53,9 @@ filter_btn.addEventListener("click", (e) => {
 });
 let likes = JSON.parse(localStorage.getItem("likes")) || [];
 function Likeshop(data) {
-   likes = [...likes, data];
-   localStorage.setItem("likes", JSON.stringify(likes));
-   cardLengthFunc2();
+  likes = [...likes, data];
+  localStorage.setItem("likes", JSON.stringify(likes));
+  cardLengthFunc2();
 }
 
 function AddToCard(data) {
@@ -68,11 +68,22 @@ function cardLengthFunc() {
   let cardlength = card.length;
   counter.innerHTML = cardlength;
 }
+let userId = localStorage.getItem("userId");
 
 function cardLengthFunc2() {
   let cardlength2 = likes.length;
   counter2.innerHTML = cardlength2;
 }
+logout.addEventListener("click", () => {
+  localStorage.removeItem("userId");
+  location.reload()
+});
 
+
+if (userId) {
+  logout.style.display = "block";
+} else {
+  logout.style.display = "none";
+}
 cardLengthFunc();
 cardLengthFunc2();
