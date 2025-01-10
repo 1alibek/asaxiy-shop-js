@@ -6,6 +6,7 @@ const counter2 = document.querySelector(".counter2");
 const logout = document.querySelector(".logout");
 const filter_btn = document.querySelector(".filter_btn");
 const searchInput = document.querySelector(".searchInput");
+const formInput =document.querySelector('.formInput')
 
 const request = usefetch();
 let card = JSON.parse(localStorage.getItem("cards")) || [];
@@ -15,6 +16,7 @@ let productdata = [];
 request().then((data) => {
   productdata = data;
   getData(productdata);
+  searchData(data);
 });
 
 function getData(data) {
@@ -92,12 +94,15 @@ if (userId) {
 
 cardLengthFunc();
 cardLengthFunc2();
-
-// Search functionality
-searchInput.addEventListener("input", (e) => {
-  const searchTerm = e.target.value.toLowerCase();
-  const filteredData = productdata.filter((item) =>
-    item.name.toLowerCase().includes(searchTerm)
-  );
-  getData(filteredData);
-});
+function searchData(data) {
+  formInput.addEventListener("keyup", (e) => {
+    e.preventDefault();
+    const searchTerm = searchInput.value;
+    const filteredData = data.filter((item) => {
+      let SearchName = item.title.toLowerCase().trim();
+      return SearchName.includes(searchTerm.toLowerCase().trim());
+    });
+    cards.innerHTML = "";
+    getData(filteredData);
+  });
+}
