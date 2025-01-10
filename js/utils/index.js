@@ -1,4 +1,5 @@
 let BASE_URL = "https://677a303e671ca03068334652.mockapi.io/products";
+
 const usefetch = () => {
   const response = () => {
     return fetch(BASE_URL,{
