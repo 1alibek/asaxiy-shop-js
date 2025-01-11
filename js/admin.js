@@ -1,3 +1,6 @@
+if (localStorage.getItem("userId") !== "admin") {
+  window.location.href = "./index.html";
+}
 document.addEventListener("DOMContentLoaded", () => {
   const appendAllProduct = document.getElementById("append-all-product");
   const addBtn = document.getElementById("add-btn");
@@ -8,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const addMonthlyPay = document.getElementById("add-monthlyPay");
   const addImg = document.getElementById("add-img");
   const addCategory = document.getElementById("add-category");
-  const logoutBtn = document.querySelector(".logout"); 
+  const logoutBtn = document.querySelector(".logout");
 
   let editMode = false;
   let editingProductId = null;
@@ -41,7 +44,9 @@ document.addEventListener("DOMContentLoaded", () => {
       <p class="absolute top-[5px] left-[5px] text-[12px] text-[#fff] bg-blue-500 p-[2px_6px] rounded-md">
         ${product.category}</p>
       <div class="h-[130px] w-[130px] m-auto">
-        <img src="${product.img}" alt="" class="object-contain h-[130px] w-[130px]">
+        <img src="${
+          product.img
+        }" alt="" class="object-contain h-[130px] w-[130px]">
       </div>
       <h1 class="text-gray-600 leading-[120%]">${product.title}</h1>
       <div class="flex flex-col w-full gap-[2px]">
@@ -52,8 +57,12 @@ document.addEventListener("DOMContentLoaded", () => {
           .toLocaleString()
           .replace(/,/g, " ")} so'm / 12 oy</p>
         <div class="flex items-center justify-between mt-2">
-          <button class="edit-btn bg-blue-600 text-white rounded-lg py-2 px-4" data-id="${product.id}">Edit</button>
-          <button class="delete-btn bg-red-600 text-white rounded-lg py-2 px-4" data-id="${product.id}">Delete</button>
+          <button class="edit-btn bg-blue-600 text-white rounded-lg py-2 px-4" data-id="${
+            product.id
+          }">Edit</button>
+          <button class="delete-btn bg-red-600 text-white rounded-lg py-2 px-4" data-id="${
+            product.id
+          }">Delete</button>
         </div>
       </div>
     `;
@@ -85,9 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     productDiv.querySelector(".edit-btn").addEventListener("click", (e) => {
       const productId = e.target.getAttribute("data-id");
-      fetch(
-        `https://677a303e671ca03068334652.mockapi.io/products/${productId}`
-      )
+      fetch(`https://677a303e671ca03068334652.mockapi.io/products/${productId}`)
         .then((res) => res.json())
         .then((product) => {
           addTitle.value = product.title;
@@ -128,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((res) => res.json())
         .then((updatedProduct) => {
           alert("Mahsulot muvaffaqiyatli yangilandi!");
-          location.reload(); 
+          location.reload();
         })
         .catch((err) => console.error("Yangilashda xato:", err));
     } else {
@@ -146,14 +153,12 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch((err) => console.error("Qo'shishda xato:", err));
     }
 
-    
     addForm.reset();
     box.style.display = "none";
     editMode = false;
     editingProductId = null;
   });
 
- 
   addBtn.addEventListener("click", () => {
     box.style.display = "block";
     box.style.backgroundColor = "white";
