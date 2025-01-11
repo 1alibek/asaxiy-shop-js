@@ -17,6 +17,15 @@ form.addEventListener("submit", (e) => {
   fetch("https://677a303e671ca03068334652.mockapi.io/users")
     .then((res) => res.json())
     .then((data) => {
+       if (email === "admin@gmail.com" && password === "123") {
+         error.classList.add("hidden");
+         
+         localStorage.setItem("userId", "admin"); // Admin ID sifatida maxsus qiymat
+         setTimeout(() => {
+           window.location.href = "./admin.html";
+         }, 2000);
+         return; // Admin topilgan bo'lsa, keyingi tekshirishni o'tkazib yuboramiz
+       }
       const user = data.find(
         (e) => e.email === email && e.password === password
       );
