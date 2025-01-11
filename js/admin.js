@@ -49,12 +49,11 @@ function hideSections() {
   });
 }
 
-addBtn.addEventListener("click", () => {
-  hideSections();
-  addSection.classList.add("active");
-});
+
 const box = document.querySelector(".box");
 
 addBtn.addEventListener("click", (e) => {
   box.style.display = "block";
+  box.style.backgroundColor = "white";
+  box.style.height = "100vh";
 });
