@@ -2,8 +2,8 @@ let BASE_URL = "https://677a303e671ca03068334652.mockapi.io/products";
 
 const usefetch = () => {
   const response = () => {
-    return fetch(BASE_URL,{
-      method:'GET',
+    return fetch(BASE_URL, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
@@ -15,7 +15,7 @@ const usefetch = () => {
 };
 function addUIData(value, cards) {
   let card = document.createElement("div");
-  card.classList.add("card")
+  card.classList.add("card");
   card.innerHTML = `
      <div class="relative">
      <i class="fa-regular fa-heart likebtn absolute top-1 left-4 like"></i>

@@ -6,7 +6,9 @@ const counter2 = document.querySelector(".counter2");
 const logout = document.querySelector(".logout");
 const filter_btn = document.querySelector(".filter_btn");
 const searchInput = document.querySelector(".searchInput");
-const formInput =document.querySelector('.formInput')
+const formInput = document.querySelector(".formInput");
+const loader = document.querySelector(".loader-box");
+
 
 const request = usefetch();
 let card = JSON.parse(localStorage.getItem("cards")) || [];
@@ -14,11 +16,15 @@ let category = localStorage.getItem("sort") || "all";
 let productdata = [];
 
 request().then((data) => {
+  loader.classList.remove("hidden");
   productdata = data;
   getData(productdata);
+  loader.classList.add("hidden");
   searchData(data);
-});
 
+}).catch((err) => {
+  console.log(err);
+})
 function getData(data) {
   cards.innerHTML = "";
   if (category !== "all") {
@@ -27,6 +33,7 @@ function getData(data) {
   data.forEach((value) => {
     addUIData(value, cards);
   });
+
   setupButtons(data);
 }
 
